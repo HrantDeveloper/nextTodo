@@ -7,11 +7,13 @@ import { getQuantityData } from "@/app/helpers/helpersForData";
 import { useGlobalContext } from "@/app/Context/store";
 import { searchData } from "@/app/helpers/helpersForData";
 import { useRouter } from "next/navigation";
+import { CiMenuBurger } from "react-icons/ci";
+
 const Navbar = () => {
   const [isActive, setIsActive] = useState(false);
   const [itemQuantity, setItemQuantity] = useState(null);
   const router = useRouter();
-  const { stateIsChanged, setTableData, navLinkIsActive, setNavLinkIsActive } =
+  const { stateIsChanged, setTableData, mediaMenuIsOpen, setMediaMenuIsOpen } =
     useGlobalContext();
 
   useEffect(() => {
@@ -46,7 +48,14 @@ const Navbar = () => {
   };
 
   return (
-    <nav className={styles.nav}>
+    <nav className={!mediaMenuIsOpen ? styles.nav : styles.navMedia}>
+      {mediaMenuIsOpen && (
+        <CiMenuBurger
+          // className={styles.mediaMenu}
+          onClick={() => setMediaMenuIsOpen((prev) => !prev)}
+        />
+      )}
+
       <div style={{ paddingLeft: "15px", paddingRight: "15px" }}>
         <input
           type="text"

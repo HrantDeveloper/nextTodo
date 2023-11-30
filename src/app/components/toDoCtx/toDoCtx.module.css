@@ -12,6 +12,10 @@
     display: flex;
     justify-content: space-between;
 }
+.mediaMenu{
+    color:"white";
+    display: none;
+}
 .icons{
     width: 150px;
     display: flex;
@@ -26,3 +30,11 @@
 .icon:hover{
     background-color:white
 }
+
+@media (max-width: 480px) {
+    .mediaMenu{
+        display: block;
+     margin-bottom: 10px;
+    }
+ }
+
