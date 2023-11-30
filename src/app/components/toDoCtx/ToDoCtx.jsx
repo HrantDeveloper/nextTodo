@@ -10,10 +10,12 @@ import AddTaskInput from "../todoList/AddTaskInput";
 import { getData } from "@/app/helpers/helpersForData";
 import PageLoader from "../pageLoader/PageLoader";
 import { useGlobalContext } from "@/app/Context/store";
+import { CiMenuBurger } from "react-icons/ci";
 
 const ToDoCtx = ({ page, title }) => {
   const date = getCurrentDate("large");
-  const { stateIsChanged, tableData, setTableData } = useGlobalContext();
+  const { stateIsChanged, tableData, setTableData, setMediaMenuIsOpen } =
+    useGlobalContext();
 
   const [isLoading, setIsLoading] = useState(false);
   let bgColor;
@@ -48,6 +50,10 @@ const ToDoCtx = ({ page, title }) => {
       className={styles.sectionMyDay}
       style={{ backgroundColor: bgColor }}
     >
+      <CiMenuBurger
+        className={styles.mediaMenu}
+        onClick={() => setMediaMenuIsOpen((prev) => !prev)}
+      />
       <header className={styles.toDoCtxHeader}>
         <div
           style={{

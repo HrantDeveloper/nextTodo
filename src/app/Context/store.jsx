@@ -14,7 +14,7 @@ export const GlobalContextProvider = ({ children }) => {
   const [menuBarIsOpen, setMenuBarIsOpen] = useState(false);
   const [menuBarData, setMenuBarData] = useState(null);
   const [tableData, setTableData] = useState(null);
-  const [navLinkIsActive, setNavLinkIsActive] = useState("");
+  const [mediaMenuIsOpen, setMediaMenuIsOpen] = useState("");
 
   return (
     <GlobalContext.Provider
@@ -27,8 +27,8 @@ export const GlobalContextProvider = ({ children }) => {
         setMenuBarData,
         tableData,
         setTableData,
-        navLinkIsActive,
-        setNavLinkIsActive,
+        mediaMenuIsOpen,
+        setMediaMenuIsOpen,
       }}
     >
       {children}
