@@ -2,16 +2,15 @@
 import React, { useEffect, useState } from "react";
 import styles from "./navBar.module.css";
 import Link from "next/link";
-import { navBarData } from "@/app/config";
-import { getQuantityData } from "@/app/helpers/helpersForData";
-import { useGlobalContext } from "@/app/Context/store";
-import { searchData } from "@/app/helpers/helpersForData";
+import { navBarData } from "./../../config";
+import { getQuantityData,searchData } from "./../../helpers/helpersForData";
+import { useGlobalContext } from "./../../Context/store";
 import { useRouter } from "next/navigation";
 import { CiMenuBurger } from "react-icons/ci";
 
-const Navbar = () => {
-  const [isActive, setIsActive] = useState(false);
-  const [itemQuantity, setItemQuantity] = useState(null);
+const Navbar:React.FC = () => {
+  const [isActive, setIsActive] = useState("");
+  const [itemQuantity, setItemQuantity] = useState<any>();
   const router = useRouter();
   const { stateIsChanged, setTableData, mediaMenuIsOpen, setMediaMenuIsOpen } =
     useGlobalContext();
@@ -31,7 +30,7 @@ const Navbar = () => {
     fetchData();
   }, [stateIsChanged]);
 
-  const handleSearcher = async (event) => {
+  const handleSearcher = async (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
     if (event.target.value) {
       const data = await searchData(event.target.value);
@@ -39,9 +38,9 @@ const Navbar = () => {
     }
   };
 
-  const changeIsActive = (id) => {
+  const changeIsActive = (id:string) => {
     if (typeof window !== "undefined") {
-      window.localStorage.setItem("isAcvtiveId", JSON.stringify(id));
+      window.localStorage.setItem("isAcvtiveId", id);
     } else {
       return;
     }
@@ -51,8 +50,7 @@ const Navbar = () => {
     <nav className={!mediaMenuIsOpen ? styles.nav : styles.navMedia}>
       {mediaMenuIsOpen && (
         <CiMenuBurger
-          // className={styles.mediaMenu}
-          onClick={() => setMediaMenuIsOpen((prev) => !prev)}
+          onClick={() => setMediaMenuIsOpen((prev:boolean) => !prev)}
         />
       )}
 
@@ -68,7 +66,8 @@ const Navbar = () => {
       <div className={styles.navBarList}>
         {navBarData &&
           itemQuantity &&
-          navBarData.map((item, index) => (
+          navBarData.map((item:navBarDataItemType, index:number) => 
+          (
             <Link
               href={item.path}
               key={item.id}
@@ -85,9 +84,10 @@ const Navbar = () => {
                 {item.icon}
                 <p style={{ marginLeft: "10px" }}>{item.title}</p>
               </div>
-              <p style={{ width: "30px" }}>{itemQuantity[index][1]}</p>
+              <p style={{ width: "30px" }}>{itemQuantity && itemQuantity[index][1]}</p>
             </Link>
-          ))}
+          )
+          )}
       </div>
     </nav>
   );

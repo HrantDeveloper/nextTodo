@@ -5,25 +5,25 @@ import { GoHome } from "react-icons/go";
 
 export const navBarData = [
   {
-    id: 1,
+    id: "myDay",
     title: "My Day",
     icon: <WiDaySunny />,
     path: "/",
   },
   {
-    id: 2,
+    id: "important",
     title: "Important",
     icon: <FaRegStar />,
     path: "important",
   },
   {
-    id: 3,
+    id: "planned",
     title: "Planned",
     icon: <CgMenuBoxed />,
     path: "planned",
   },
   {
-    id: 4,
+    id: "tasks",
     title: "Tasks",
     icon: <GoHome />,
     path: "tasks",

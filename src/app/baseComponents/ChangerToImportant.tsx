@@ -3,7 +3,7 @@ import React from "react";
 import { CiStar } from "react-icons/ci";
 import { FaStar } from "react-icons/fa6";
 
-const ChangerToImportant = ({ classes, updateItem, id, data }) => {
+const ChangerToImportant :React.FC<{classes:string,updateItem:any,id:string,data:itemDataType}>= ({ classes, updateItem, id, data }) => {
   return (
     <div
       style={{ width: "40px", height: "100%" }}

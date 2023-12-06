@@ -1,4 +1,4 @@
-import Layout from "@/Layout/Layout";
+import Layout from "./../../Layout/Layout";
 import styles from "../page.module.css";
 import ToDoCtx from "../components/toDoCtx/ToDoCtx";
 const SearchPage = () => {

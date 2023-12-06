@@ -1,7 +1,7 @@
 import { memo } from "react";
 import { PageLoaderWrapper } from "./PageLoader.styled";
 
-const PageLoader = () => {
+const PageLoader:React.FC = () => {
   return (
     <PageLoaderWrapper>
       <div className="lds-roller">

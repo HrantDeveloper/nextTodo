@@ -5,17 +5,14 @@ import { MdKeyboardArrowDown } from "react-icons/md";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import { useState } from "react";
 
-const TodoTable = ({ tableData }) => {
-  const [widgets, setWidgets] = useState([]);
+const TodoTable :React.FC<any>= ({ tableData }) => {
   let thereIsCompleted = 0;
   const [completedOpen, setCompletedOpen] = useState(true);
-
-  const handleOnDrag = () => {};
 
   return (
     <div className={styles.todoTable}>
       {tableData &&
-        tableData.map((item) => {
+        tableData.map((item:itemDataType) => {
           if (item.completed.boolean == false) {
             return <TodoListItem key={item.id} data={item} />;
           } else {
@@ -34,7 +31,6 @@ const TodoTable = ({ tableData }) => {
             alignItems: "center",
             cursor: "pointer",
           }}
-          // className={styles.completed}
           onClick={() => setCompletedOpen((prev) => !prev)}
         >
           {completedOpen ? <MdKeyboardArrowDown /> : <MdKeyboardArrowRight />}
@@ -43,9 +39,9 @@ const TodoTable = ({ tableData }) => {
       )}
       {tableData &&
         completedOpen &&
-        tableData.map((item) => {
+        tableData.map((item:itemDataType) => {
           if (item.completed.boolean) {
-            return <TodoListItem key={item.id} data={item} completed={true} />;
+            return <TodoListItem key={item.id} data={item} />;
           }
         })}
     </div>

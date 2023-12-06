@@ -1,4 +1,4 @@
-import { db } from "@/app/firebaseConfig";
+import { db } from "../firebaseConfig";
 import {
   collection,
   addDoc,
@@ -10,36 +10,41 @@ import {
 
 import { getCurrentDate } from "./heleperFuncs";
 
-export async function postData(data) {
+export async function postData(data:PostedItemDataType) {
   try {
     const docRef = await addDoc(collection(db, "tasks"), data);
     return true;
   } catch (error) {
-    alert("document was not sent", error);
+    alert("document was not sent");
     return false;
   }
 }
-export async function searchData(serchedWord) {
+
+export async function searchData(serchedWord:string) {
+  
   const response = await getDocs(collection(db, "tasks"));
-  const data = [];
+  let data :[{}]=[{}];
   response.forEach((doc) => {
-    data.push({ id: doc.id, ...doc.data() });
+    data.push({ id: doc.id, ...doc.data()} );
   });
-  const searchResults = data.filter((item) => item.name.includes(serchedWord));
+  console.log(data)
+  data.shift()
+  const searchResults = data.filter((item:any) => item.name.includes(serchedWord));
   return searchResults;
+
 }
 
-export async function getData(page) {
+export async function getData(page:string) {
   const todayDate = getCurrentDate("short");
   const response = await getDocs(collection(db, "tasks"));
-  const data = [];
+  let data : {}[] = [{}];
   response.forEach((doc) => {
     data.push({ id: doc.id, ...doc.data() });
   });
-  let filteredData = [];
+  let filteredData: {}[] = [{}];
 
   if (page == "myDay") {
-    data.map((item) => {
+    data.map((item:any) => {
       if (item.type == "myDay") {
         filteredData.push(item);
       } else if (item.type == "planned" && item.date == todayDate) {
@@ -47,29 +52,29 @@ export async function getData(page) {
       }
     });
   } else if (page == "planned") {
-    filteredData = data.filter((item) => {
+    filteredData = data.filter((item:any) => {
       if (item.date) {
         return item.date !== todayDate || item.type == "planned";
       }
     });
   } else {
-    filteredData = data.filter((item) => item.type == page);
+    filteredData = data.filter((item:any) => item.type == page);
   }
+
   return page !== "tasks" ? filteredData : data;
 }
 
-export async function deleteData(id) {
+export async function deleteData(id:string) {
   try {
     await deleteDoc(doc(db, "tasks", id));
     return true;
   } catch (error) {
-    alert("document was not deleted", error);
-    console.log(error.message);
+    alert("document was not deleted");
     return false;
   }
 }
 
-export async function updateData(id, newData) {
+export async function updateData(id:string, newData:any) {
   try {
     const updateRef = doc(db, "tasks", id);
     await updateDoc(updateRef, newData);
@@ -81,14 +86,14 @@ export async function updateData(id, newData) {
 export async function getQuantityData() {
   const todayDate = getCurrentDate("short");
   const response = await getDocs(collection(db, "tasks"));
-  const data = [];
-  let myDayQuanity = [];
-  let importantQuanity = [];
-  let plannedQuantity = [];
+  let data : [{}]=[{}];
+  let myDayQuanity:[{}] = [{}];
+  let importantQuanity:[{}] = [{}];
+  let plannedQuantity:[{}] = [{}];
   response.forEach((doc) => {
     data.push({ id: doc.id, ...doc.data() });
   });
-  data.map((item) => {
+  data.map((item:any) => {
     if (item.type == "myDay") {
       if (item.date && item.date !== todayDate) {
         plannedQuantity.push(item);

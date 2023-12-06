@@ -1,14 +1,14 @@
-import Layout from "@/Layout/Layout";
+import Layout from "./../../Layout/Layout";
 import styles from "../page.module.css";
 import ToDoCtx from "../components/toDoCtx/ToDoCtx";
-const ImportantPage = () => {
+const AllTasksPage = () => {
   return (
     <main className={styles.main}>
       <Layout>
-        <ToDoCtx page="important" title="Important" />
+        <ToDoCtx page="tasks" title="Tasks" />
       </Layout>
     </main>
   );
 };
 
-export default ImportantPage;
+export default AllTasksPage;

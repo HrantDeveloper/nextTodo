@@ -1,0 +1,44 @@
+.wrapper{
+    position: absolute;
+    width: 300px;
+    height: 180px;
+    border-radius: 5px;
+    background-color: whitesmoke;
+    padding: 30px;
+    right: 600px;
+    top: 250px;
+}
+.buttonDiv{
+    width: 100%;
+    margin-top: 30px;
+    display: flex;
+    padding-left: 30px;
+    padding-right: 30px;
+    justify-content: space-between;
+}
+.deleteButton{
+    width: 85px;
+    height: 35px;
+    background-color: red;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+}
+.cancelButton{
+    width: 85px;
+    height: 35px;
+    background-color: #C0C0C0;
+    color: grey;
+    border-radius: 5px;
+    cursor: pointer;
+    border: 1px solid #C0C0C0;
+}
+
+
+@media (max-width: 480px) {
+    .wrapper{
+        right:40px;
+        top:250px
+    }
+    }
