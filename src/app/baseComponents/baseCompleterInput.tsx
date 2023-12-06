@@ -1,6 +1,6 @@
 import React from "react";
 
-const BaseCompleterInput = ({ data, func, date }) => {
+const BaseCompleterInput :React.FC<{data:itemDataType,func:any,date:string}>= ({ data, func, date }) => {
   return (
     <input
       type="checkbox"

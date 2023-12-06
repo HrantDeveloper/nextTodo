@@ -6,23 +6,23 @@ import {
   getCurrentDate,
   getNextWeekDate,
   getTomorrowsDate,
-} from "@/app/helpers/heleperFuncs";
+} from "./../../helpers/heleperFuncs";
 import styles from "./dateChanger.module.css";
-import { dateChangerTypesData } from "@/app/config";
+import { dateChangerTypesData } from "./../../config";
 
-const DateChanger = ({
+const DateChanger:React.FC<DateChangerType> = ({
   data,
   updateItem,
   calendarIsOpen,
   setCalendarIsOpen,
 }) => {
-  const changedDateRef = useRef();
+  const changedDateRef = useRef<HTMLInputElement>(null);
   const today = getCurrentDate("short");
   const tomorrow = getTomorrowsDate();
   const nextWeekDate = getNextWeekDate();
   const [dateChangerMenuIsOpen, setDateChangerMenuIsOpen] = useState(false);
 
-  const dateChangerChooser = (dateChangerType) => {
+  const dateChangerChooser = (dateChangerType:number) => {
     setDateChangerMenuIsOpen((prev) => !prev);
     if (dateChangerType == 1) {
       updateItem(data.id, {
@@ -85,7 +85,7 @@ const DateChanger = ({
               {
                 ...data,
                 date:
-                  changedDateRef.current.value && changedDateRef.current.value,
+                  changedDateRef.current?.value && changedDateRef.current.value,
               },
               "date"
             )

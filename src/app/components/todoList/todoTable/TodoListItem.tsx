@@ -1,25 +1,25 @@
 "use client";
-import React, { useEffect } from "react";
+import React from "react";
 import styles from "./toDoListItem.module.css";
-import { getCurrentDate } from "@/app/helpers/heleperFuncs";
-import { updateData } from "@/app/helpers/helpersForData";
-import { useGlobalContext } from "@/app/Context/store";
-import ChangerToImportant from "@/app/baseComponents/ChangerToImportant";
-import BaseCompleterInput from "@/app/baseComponents/baseCompleterInput";
+import { getCurrentDate } from "./../../../helpers/heleperFuncs";
+import { updateData } from "./../../../helpers/helpersForData";
+import { useGlobalContext } from "./../../../Context/store";
+import ChangerToImportant from "./../../../baseComponents/ChangerToImportant";
+import BaseCompleterInput from "./../../../baseComponents/baseCompleterInput";
 
-const TodoListItem = ({ data, completed }) => {
-  const date = getCurrentDate("short");
+const TodoListItem:React.FC<{data:itemDataType}> = ({ data }) => {
+  const date:string = getCurrentDate("short");
   const { setStateIsChanged, setMenuBarIsOpen, setMenuBarData, menuBarIsOpen } =
     useGlobalContext();
 
-  const openEditingMenu = () => {
+  const openEditingMenu = (data:object) => {
     setMenuBarData(data);
     if (!menuBarIsOpen) {
       setMenuBarIsOpen((prev) => !prev);
     }
   };
 
-  const updateItem = async (id, newData) => {
+  const updateItem = async (id:string, newData:itemDataType) => {
     await updateData(id, newData);
     try {
       setStateIsChanged((prev) => !prev);
@@ -42,7 +42,7 @@ const TodoListItem = ({ data, completed }) => {
           }}
           onClick={() => openEditingMenu(data)}
         >
-          <p className={completed ? styles.completedName : ""}>{data.name}</p>
+          <p className={data.completed.boolean ? styles.completedName : ""}>{data.name}</p>
           <div style={{ display: "flex", marginTop: "5px" }}>
             <p style={{ fontSize: "12px" }}>{data.type} .</p>
             <p

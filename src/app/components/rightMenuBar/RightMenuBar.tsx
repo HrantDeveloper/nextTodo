@@ -3,24 +3,24 @@ import React from "react";
 import styles from "./rightMenuBar.module.css";
 import { IoIosClose } from "react-icons/io";
 import { AiOutlineDelete } from "react-icons/ai";
-import { useGlobalContext } from "@/app/Context/store";
+import { useGlobalContext } from "./../../Context/store";
 import { useRef, useState } from "react";
-import { updateData, deleteData } from "@/app/helpers/helpersForData";
-import ChangerToImportant from "@/app/baseComponents/ChangerToImportant";
+import { updateData, deleteData } from "./../../helpers/helpersForData";
+import ChangerToImportant from "./../../baseComponents/ChangerToImportant";
 import DateChanger from "./DateChanger";
-import BaseCompleterInput from "@/app/baseComponents/baseCompleterInput";
-import { getCurrentDate } from "@/app/helpers/heleperFuncs";
+import BaseCompleterInput from "./../../baseComponents/baseCompleterInput";
+import { getCurrentDate } from "./../../helpers/heleperFuncs";
 import Modal from "./Modal";
 
-const RightMenuBar = ({ data }) => {
+const RightMenuBar:React.FC<{data:itemDataType}> = ({ data }) => {
   const { setMenuBarIsOpen, setStateIsChanged, setMenuBarData } =
     useGlobalContext();
-  const inputRef = useRef();
-  const [calendarIsOpen, setCalendarIsOpen] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [calendarIsOpen, setCalendarIsOpen] = useState<boolean>(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const today = getCurrentDate("short");
+  const today:string = getCurrentDate("short");
 
-  const updateItem = async (id, newData, whatIsChanged) => {
+  const updateItem = async (id:string, newData:itemDataType, whatIsChanged:string) => {
     if (whatIsChanged == "title") {
       if (newData.name) {
         await updateData(id, newData);
@@ -32,7 +32,7 @@ const RightMenuBar = ({ data }) => {
     try {
       setStateIsChanged((prev) => !prev);
       setMenuBarData(newData);
-      inputRef.current.value = "";
+      inputRef.current!.value = "";
       if (whatIsChanged == "date") {
         setCalendarIsOpen((prev) => !prev);
       }
@@ -41,8 +41,8 @@ const RightMenuBar = ({ data }) => {
     }
   };
 
-  const deleteItem = async (id) => {
-    await deleteData(id, "tasks");
+  const deleteItem = async (id:string) => {
+    await deleteData(id);
     try {
       setStateIsChanged((prev) => !prev);
       setModalIsOpen((prev) => !prev);
@@ -76,7 +76,7 @@ const RightMenuBar = ({ data }) => {
               data.id,
               {
                 ...data,
-                name: inputRef.current.value && inputRef.current.value,
+                name: inputRef.current?.value && inputRef.current.value,
               },
               "title"
             )

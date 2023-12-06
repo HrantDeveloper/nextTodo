@@ -1,7 +1,9 @@
 import ToDoCtx from "./components/toDoCtx/ToDoCtx";
 import styles from "./page.module.css";
-import Layout from "@/Layout/Layout";
-export default function Home() {
+
+import Layout from "./../Layout/Layout";
+
+export default function Home(){
   return (
     <main className={styles.main}>
       <Layout>

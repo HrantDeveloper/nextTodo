@@ -1,16 +1,16 @@
 "use client";
 import { IoAdd } from "react-icons/io5";
 import { useRef, useEffect, useState } from "react";
-import { postData } from "@/app/helpers/helpersForData";
-import { getCurrentDate } from "@/app/helpers/heleperFuncs";
-import { useGlobalContext } from "@/app/Context/store";
+import { postData } from "./../../helpers/helpersForData";
+import { getCurrentDate } from "../../helpers/heleperFuncs";
+import { useGlobalContext } from "./../../Context/store";
 
-const AddTaskInput = ({ page }) => {
-  const { setStateIsChanged, setMenuBarIsOpen } = useGlobalContext();
-  const taskName = useRef();
-  const choosedDateRef = useRef();
+const AddTaskInput:React.FC<{page:string}> = ({ page }) => {
+  const { setStateIsChanged } = useGlobalContext();
+  const taskName = useRef<HTMLInputElement>(null);
+  const choosedDateRef = useRef<HTMLInputElement>(null);
   const [isActive, setIsActive] = useState("");
-  const date = getCurrentDate("short");
+  const date:string = getCurrentDate("short");
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -19,31 +19,32 @@ const AddTaskInput = ({ page }) => {
     }
   }, []);
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      if (taskName.current.value) {
-        await postData({
-          name: taskName.current.value,
-          date: choosedDateRef.current.value
-            ? choosedDateRef.current.value
-            : date,
-          important: page == "important" ? true : false,
-          completed: {
-            boolean: false,
-            date: "",
-          },
-          type: page,
-        });
+      if (taskName.current?.value) {
+        await postData( {
+        completed:{
+          boolean:false,
+          date:""
+      },
+      date:choosedDateRef.current?.value
+          ? choosedDateRef.current.value
+          : date,
+      important:page == "important" ? true : false,
+      name:taskName.current.value,
+      type:page
+    }
+        );
       } else {
         return;
       }
       taskName.current.value = "";
-      choosedDateRef.current.value = "";
+      choosedDateRef.current!.value = "";
       setStateIsChanged((prev) => !prev);
       return true;
     } catch (error) {
-      alert("document was not sent", error);
+      alert("document was not sent");
       return false;
     }
   };
