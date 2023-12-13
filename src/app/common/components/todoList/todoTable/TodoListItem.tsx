@@ -1,18 +1,18 @@
 "use client";
 import React from "react";
 import styles from "./toDoListItem.module.css";
-import { getCurrentDate } from "./../../../helpers/heleperFuncs";
-import { updateData } from "./../../../helpers/helpersForData";
+import { getCurrentDate } from "./../../../../helpers/heleperFuncs";
+import { updateData } from "./../../../../helpers/helpersForData";
 import { useGlobalContext } from "./../../../Context/store";
-import ChangerToImportant from "./../../../baseComponents/ChangerToImportant";
-import BaseCompleterInput from "./../../../baseComponents/baseCompleterInput";
+import ChangerToImportant from "./../../baseComponents/ChangerToImportant";
+import BaseCompleterInput from "./../../baseComponents/baseCompleterInput";
 
 const TodoListItem:React.FC<{data:itemDataType}> = ({ data }) => {
   const date:string = getCurrentDate("short");
   const { setStateIsChanged, setMenuBarIsOpen, setMenuBarData, menuBarIsOpen } =
     useGlobalContext();
 
-  const openEditingMenu = (data:object) => {
+  const openEditingMenu = (data:itemDataType) => {
     setMenuBarData(data);
     if (!menuBarIsOpen) {
       setMenuBarIsOpen((prev) => !prev);

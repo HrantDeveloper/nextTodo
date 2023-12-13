@@ -1,0 +1,24 @@
+.form{
+    display: flex;
+    padding-left: 10px;
+    height: 50px;
+    background-color: white;
+    margin-top: 30px;
+    border-radius: 5px;
+}
+.plusIconDiv{
+    display: flex;
+    align-items: center;
+    justify-content: center;   
+}
+.icon{
+    height: 100%;
+    width: 100%;
+    border: none;
+    padding-left: 10px;
+    border-radius: 5px;
+}
+.dateInput{
+    border: none;
+    width: 100px;
+}

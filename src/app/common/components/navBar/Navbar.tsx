@@ -2,17 +2,16 @@
 import React, { useEffect, useState } from "react";
 import styles from "./navBar.module.css";
 import Link from "next/link";
-import { navBarData } from "./../../config";
-import { getQuantityData,searchData } from "./../../helpers/helpersForData";
+import { navBarData } from "./../../../config";
+import { searchData } from "./../../../helpers/helpersForData";
 import { useGlobalContext } from "./../../Context/store";
 import { useRouter } from "next/navigation";
 import { CiMenuBurger } from "react-icons/ci";
 
-const Navbar:React.FC = () => {
+const Navbar:React.FC<{navBarQuantity:[]}> = ({navBarQuantity}) => {
   const [isActive, setIsActive] = useState("");
-  const [itemQuantity, setItemQuantity] = useState<any>();
   const router = useRouter();
-  const { stateIsChanged, setTableData, mediaMenuIsOpen, setMediaMenuIsOpen } =
+  const {  setTableData, mediaMenuIsOpen, setMediaMenuIsOpen } =
     useGlobalContext();
 
   useEffect(() => {
@@ -21,14 +20,6 @@ const Navbar:React.FC = () => {
       localStorageItem && setIsActive(localStorageItem);
     }
   }, []);
-
-  useEffect(() => {
-    async function fetchData() {
-      const data = await getQuantityData();
-      setItemQuantity(data);
-    }
-    fetchData();
-  }, [stateIsChanged]);
 
   const handleSearcher = async (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
@@ -65,7 +56,7 @@ const Navbar:React.FC = () => {
       </div>
       <div className={styles.navBarList}>
         {navBarData &&
-          itemQuantity &&
+          navBarQuantity &&
           navBarData.map((item:navBarDataItemType, index:number) => 
           (
             <Link
@@ -84,7 +75,7 @@ const Navbar:React.FC = () => {
                 {item.icon}
                 <p style={{ marginLeft: "10px" }}>{item.title}</p>
               </div>
-              <p style={{ width: "30px" }}>{itemQuantity && itemQuantity[index][1]}</p>
+              <p style={{ width: "30px" }}>{navBarQuantity && navBarQuantity[index][1]}</p>
             </Link>
           )
           )}

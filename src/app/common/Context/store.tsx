@@ -6,14 +6,19 @@ import {
   Dispatch,
   SetStateAction,
 } from "react";
+import { getCurrentDate } from "../../helpers/heleperFuncs";
 
 type ContextProps={
+  dateLarge:string;
+  dateShort:string;
+  isLoading:boolean,
+  setIsLoading:Dispatch<SetStateAction<boolean>>,
   stateIsChanged:boolean,
   setStateIsChanged:Dispatch<SetStateAction<boolean>>,
   menuBarIsOpen:boolean,
   setMenuBarIsOpen:Dispatch<SetStateAction<boolean>>,
-  menuBarData:itemDataType |{} ,
-  setMenuBarData:Dispatch<SetStateAction<object>>,
+  menuBarData:itemDataType |null ,
+  setMenuBarData:Dispatch<SetStateAction<itemDataType| null>>,
   // tableData: itemDataType [],
   // setTableData:Dispatch<SetStateAction<itemDataType []>>,
   tableData: any,
@@ -23,49 +28,38 @@ type ContextProps={
 }
 
     const GlobalContext = createContext<ContextProps>({
+    dateLarge:"",
+    dateShort:"",  
+    isLoading:false,
+    setIsLoading:():boolean =>true,  
     stateIsChanged:true,
     setStateIsChanged:():boolean =>false,
     menuBarIsOpen:false,
     setMenuBarIsOpen:():boolean =>true,
-    menuBarData:{completed:{
-      boolean:false,
-      date:""
-  },
-  date:"",
-  id:"",
-  important:false,
-  name:"",
-  type:""},
+    menuBarData:null,
     setMenuBarData:():any=>{},
-  //   tableData:[{completed:{
-  //     boolean:false,
-  //     date:""
-  // },
-  // date:"",
-  // id:"",
-  // important:false,
-  // name:"",
-  // type:""}],
-  //   setTableData:():itemDataType[]=>[],
-  tableData:[],
-  setTableData:():[]=>[],
+    tableData:[],
+    setTableData:():[]=>[],
     mediaMenuIsOpen:false,
     setMediaMenuIsOpen:():boolean =>true ,
-
-
-
   })
 
-export const GlobalContextProvider :React.FC = ({ children }) => {
+export const GlobalContextProvider :React.FC <{children:React.ReactNode}>= ({ children }) => {
   const [stateIsChanged, setStateIsChanged] = useState(true);
   const [menuBarIsOpen, setMenuBarIsOpen] = useState(false);
-  const [menuBarData, setMenuBarData] = useState<{}|itemDataType>({});
+  const [isLoading, setIsLoading] = useState(false);
+  const [menuBarData, setMenuBarData] = useState<itemDataType | null>(null);
   // const [tableData, setTableData] = useState<[]|itemDataType []>([]);
   const [tableData, setTableData] = useState<any>([]);
   const [mediaMenuIsOpen, setMediaMenuIsOpen] = useState(false);
-
+  const dateLarge = getCurrentDate("large");
+  const dateShort = getCurrentDate("short");
 
   const contextValue:ContextProps = {
+    dateLarge,
+    dateShort,
+    isLoading,
+    setIsLoading,
     stateIsChanged,
     setStateIsChanged,
     menuBarIsOpen,

@@ -1,10 +1,10 @@
 import { memo } from "react";
-import { PageLoaderWrapper } from "./PageLoader.styled";
+import styles from "./pageLoader.module.css"
 
 const PageLoader:React.FC = () => {
   return (
-    <PageLoaderWrapper>
-      <div className="lds-roller">
+    <div className={styles.wrapper}>
+      <div className={styles.ldsRoller}>
         <div></div>
         <div></div>
         <div></div>
@@ -14,7 +14,7 @@ const PageLoader:React.FC = () => {
         <div></div>
         <div></div>
       </div>
-    </PageLoaderWrapper>
+      </div>
   );
 };
 

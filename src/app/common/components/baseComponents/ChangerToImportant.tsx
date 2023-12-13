@@ -11,11 +11,11 @@ const ChangerToImportant :React.FC<{classes:string,updateItem:any,id:string,data
         updateItem(id, {
           ...data,
           important: !data.important,
-          type: data.type !== "important" ? "important" : "tasks",
+          // type: data.type !== "important" ? "important" : "tasks",
         })
       }
     >
-      {data.important ? (
+      {data.important == true ? (
         <FaStar className={classes} />
       ) : (
         <CiStar className={classes} />

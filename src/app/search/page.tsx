@@ -1,11 +1,11 @@
-import Layout from "./../../Layout/Layout";
+import Layout from "./../common/Layout/Layout";
 import styles from "../page.module.css";
-import ToDoCtx from "../components/toDoCtx/ToDoCtx";
+import Search from "./Search";
 const SearchPage = () => {
   return (
     <main className={styles.main}>
       <Layout>
-        <ToDoCtx page="search" title="Search" />
+        <Search/>
       </Layout>
     </main>
   );

@@ -6,9 +6,9 @@ import {
   getCurrentDate,
   getNextWeekDate,
   getTomorrowsDate,
-} from "./../../helpers/heleperFuncs";
+} from "./../../../helpers/heleperFuncs";
 import styles from "./dateChanger.module.css";
-import { dateChangerTypesData } from "./../../config";
+import { dateChangerTypesData } from "./../../../config";
 
 const DateChanger:React.FC<DateChangerType> = ({
   data,
