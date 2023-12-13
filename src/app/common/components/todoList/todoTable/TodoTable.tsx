@@ -21,16 +21,7 @@ const TodoTable :React.FC<any>= ({ tableData }) => {
         })}
       {thereIsCompleted > 0 && (
         <div
-          style={{
-            width: "150px",
-            height: "30px",
-            marginTop: "10px",
-            backgroundColor: " #C0C0C0",
-            borderRadius: "5px",
-            display: "flex",
-            alignItems: "center",
-            cursor: "pointer",
-          }}
+          className={styles.completedButton}
           onClick={() => setCompletedOpen((prev) => !prev)}
         >
           {completedOpen ? <MdKeyboardArrowDown /> : <MdKeyboardArrowRight />}

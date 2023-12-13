@@ -1,13 +1,13 @@
-import ToDoCtx from "./components/toDoCtx/ToDoCtx";
-import styles from "./page.module.css";
 
-import Layout from "./../Layout/Layout";
+import styles from "./page.module.css";
+import Layout from "./common/Layout/Layout";
+import MyDay from "./MyDay";
 
 export default function Home(){
   return (
     <main className={styles.main}>
       <Layout>
-        <ToDoCtx page="myDay" title="My Day" />
+        <MyDay/>
       </Layout>
     </main>
   );

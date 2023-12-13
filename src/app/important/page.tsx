@@ -1,11 +1,11 @@
-import Layout from "./../../Layout/Layout";
+import Layout from "./../common/Layout/Layout";
 import styles from "../page.module.css";
-import ToDoCtx from "../components/toDoCtx/ToDoCtx";
+import Important from "./Important";
 const ImportantPage = () => {
   return (
     <main className={styles.main}>
       <Layout>
-        <ToDoCtx page="important" title="Important" />
+        <Important/>
       </Layout>
     </main>
   );

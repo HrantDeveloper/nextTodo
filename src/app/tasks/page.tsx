@@ -1,11 +1,11 @@
-import Layout from "./../../Layout/Layout";
+import Layout from "./../common/Layout/Layout";
 import styles from "../page.module.css";
-import ToDoCtx from "../components/toDoCtx/ToDoCtx";
+import Tasks from "./Tasks";
 const AllTasksPage = () => {
   return (
     <main className={styles.main}>
       <Layout>
-        <ToDoCtx page="tasks" title="Tasks" />
+        <Tasks/>
       </Layout>
     </main>
   );

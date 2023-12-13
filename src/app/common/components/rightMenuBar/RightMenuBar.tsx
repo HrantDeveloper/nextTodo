@@ -5,15 +5,15 @@ import { IoIosClose } from "react-icons/io";
 import { AiOutlineDelete } from "react-icons/ai";
 import { useGlobalContext } from "./../../Context/store";
 import { useRef, useState } from "react";
-import { updateData, deleteData } from "./../../helpers/helpersForData";
-import ChangerToImportant from "./../../baseComponents/ChangerToImportant";
+import { updateData, deleteData } from "./../../../helpers/helpersForData";
+import ChangerToImportant from "./../baseComponents/ChangerToImportant";
 import DateChanger from "./DateChanger";
-import BaseCompleterInput from "./../../baseComponents/baseCompleterInput";
-import { getCurrentDate } from "./../../helpers/heleperFuncs";
+import BaseCompleterInput from "./../baseComponents/baseCompleterInput";
+import { getCurrentDate } from "./../../../helpers/heleperFuncs";
 import Modal from "./Modal";
 
 const RightMenuBar:React.FC<{data:itemDataType}> = ({ data }) => {
-  const { setMenuBarIsOpen, setStateIsChanged, setMenuBarData } =
+  const { setMenuBarIsOpen, setStateIsChanged, setMenuBarData,setTableData } =
     useGlobalContext();
   const inputRef = useRef<HTMLInputElement>(null);
   const [calendarIsOpen, setCalendarIsOpen] = useState<boolean>(false);

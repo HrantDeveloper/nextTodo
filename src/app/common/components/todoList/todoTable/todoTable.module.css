@@ -9,15 +9,15 @@
     margin-top: "20px";
     background-Color: #899499,
 }
-.completed{
-    width: "150px";
-    height: "30px";
-    margin-top: "10px";
-    background-color: " C0C0C0";
-    border-radius: "5px";
-    display: "flex";
-    align-items: "center";
-    cursor: "pointer";
+.completedButton{
+    width: 150px;
+    height: 30px;
+    margin-top: 10px;
+    background-color:  C0C0C0;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    cursor: pointer
 }
 .completed:hover{
     background-color: white;
