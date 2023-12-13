@@ -10,40 +10,24 @@ import { getData } from "./helpers/helpersForData";
 import PageLoader from "./common/components/pageLoader/PageLoader";
 import { useGlobalContext } from "./common/Context/store";
 import { CiMenuBurger } from "react-icons/ci";
+import { useCollection } from "./common/hooks/useCollection";
+import { getCurrentDate } from "./helpers/heleperFuncs";
 
 const MyDay:React.FC = () => {
-  const { stateIsChanged, tableData, setTableData, setMediaMenuIsOpen,isLoading,setIsLoading,dateLarge,dateShort } =
-    useGlobalContext();
-
-const fetchData =async()=>{
-    let filteredData: {}[] = [];
-    const data:any = await getData();
-    data.map((item:any) => {
-             if (item.type == "myDay") {
-               filteredData.push(item);
-             } else if (item.type == "planned" && item.date == dateShort || item.date ==dateShort) {
-              filteredData.push(item);
-             }
-            })
-    setTableData(filteredData);
-    setIsLoading(false);
-}
-  useEffect(() => {
-      setIsLoading(true);
-      fetchData();
-  },[stateIsChanged]);
+  const {data} = useCollection('tasks');
+  const myDay = data.filter((item: any) => item.type == "myDay" || item.date ==  getCurrentDate('short'));
 
   return (
     <section
       className={styles.sectionMyDay}>
       <CiMenuBurger
         className={styles.mediaMenu}
-        onClick={() => setMediaMenuIsOpen((prev) => !prev)}
+        // onClick={() => setMediaMenuIsOpen((prev) => !prev)}
       />
       <header className={styles.header}>
         <div className={styles.titleArea} >
           <h2>My Day</h2>
-          <p>{dateLarge}</p>
+          <p>{getCurrentDate('long')}</p>
         </div>
         <div className={styles.icons}>
           <RiFullscreenExitFill className={styles.icon} />
@@ -51,14 +35,8 @@ const fetchData =async()=>{
           <BsThreeDots className={styles.icon} />
         </div>
       </header>
-      {isLoading ? (
-        <PageLoader />
-      ) : (
-        <>
-          <TodoTable tableData={tableData} />
-          <AddTaskInput page="myDay" />
-        </>
-      )}
+      <TodoTable tableData={data} />
+      <AddTaskInput page="myDay" />
     </section>
   );
 };

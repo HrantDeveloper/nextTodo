@@ -11,8 +11,15 @@ import { CiMenuBurger } from "react-icons/ci";
 import AddTaskInput from "../common/components/todoList/AddTaskInput";
 
 const Important:React.FC = () => {
-  const { stateIsChanged, tableData, setTableData, setMediaMenuIsOpen,isLoading,setIsLoading,dateLarge} =
-    useGlobalContext();
+  const {
+    stateIsChanged,
+    tableData,
+    setTableData,
+    setMediaMenuIsOpen,
+    isLoading,
+    setIsLoading,
+    dateLarge,
+  } = useGlobalContext();
 
 const fetchData =async()=>{
     let filteredData: {}[] = [];
@@ -21,9 +28,9 @@ const fetchData =async()=>{
       if (item.important) {
         filteredData.push(item);
       }
-     })      
+     })
     setTableData(filteredData);
-    setIsLoading(false); 
+    setIsLoading(false);
 }
 
   useEffect(() => {

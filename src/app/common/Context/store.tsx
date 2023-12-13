@@ -29,9 +29,9 @@ type ContextProps={
 
     const GlobalContext = createContext<ContextProps>({
     dateLarge:"",
-    dateShort:"",  
+    dateShort:"",
     isLoading:false,
-    setIsLoading:():boolean =>true,  
+    setIsLoading:():boolean =>true,
     stateIsChanged:true,
     setStateIsChanged:():boolean =>false,
     menuBarIsOpen:false,
@@ -52,7 +52,7 @@ export const GlobalContextProvider :React.FC <{children:React.ReactNode}>= ({ ch
   // const [tableData, setTableData] = useState<[]|itemDataType []>([]);
   const [tableData, setTableData] = useState<any>([]);
   const [mediaMenuIsOpen, setMediaMenuIsOpen] = useState(false);
-  const dateLarge = getCurrentDate("large");
+  const dateLarge = getCurrentDate("long");
   const dateShort = getCurrentDate("short");
 
   const contextValue:ContextProps = {

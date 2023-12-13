@@ -1,4 +1,4 @@
-export function getCurrentDate(type:string) {
+export function getCurrentDate(type: 'short' | 'long') {
   let now = new Date();
   let date1 = now.getDate();
   let day:string;
@@ -6,8 +6,7 @@ export function getCurrentDate(type:string) {
   if(type=="short"){
     day = now.toLocaleString('en-US', { weekday: 'short' });
     month = now.toLocaleString('en-US', { month: 'short' });
-  }
-  else{
+  } else {
     day = now.toLocaleString('en-US', { weekday: 'long' });
     month = now.toLocaleString('en-US', { month: 'long' });
   }
