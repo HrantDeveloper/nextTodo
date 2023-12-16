@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React from "react";
 import { IoIosClose } from "react-icons/io";
 import { useRef, useState } from "react";
 import {

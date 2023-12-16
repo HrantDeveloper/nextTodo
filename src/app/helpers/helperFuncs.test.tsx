@@ -1,4 +1,5 @@
 import { getCurrentDate } from './heleperFuncs';
+import { searchData } from './helpersForData';
 
 describe('getCurrentDate', () => {
   beforeEach(() => {
@@ -18,3 +19,11 @@ describe('getCurrentDate', () => {
     });
   });
 });
+
+// describe("searchData",()=>{
+//   describe("when it works",()=>{
+//     it("should return",()=>{
+//       expect(searchData("a")).toBe([{}])
+//     })
+//   })
+// })

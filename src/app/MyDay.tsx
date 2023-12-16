@@ -6,8 +6,7 @@ import { LiaLightbulb } from "react-icons/lia";
 import { BsThreeDots } from "react-icons/bs";
 import TodoTable from "./common/components/todoList/todoTable/TodoTable";
 import AddTaskInput from "./common/components/todoList/AddTaskInput";
-import { getData } from "./helpers/helpersForData";
-import PageLoader from "./common/components/pageLoader/PageLoader";
+// import PageLoader from "./common/components/pageLoader/PageLoader";
 import { useGlobalContext } from "./common/Context/store";
 import { CiMenuBurger } from "react-icons/ci";
 import { useCollection } from "./common/hooks/useCollection";
@@ -16,13 +15,13 @@ import { getCurrentDate } from "./helpers/heleperFuncs";
 const MyDay:React.FC = () => {
   const {data} = useCollection('tasks');
   const myDay = data.filter((item: any) => item.type == "myDay" || item.date ==  getCurrentDate('short'));
-
+  const { setMediaMenuIsOpen } =useGlobalContext();
   return (
     <section
       className={styles.sectionMyDay}>
       <CiMenuBurger
         className={styles.mediaMenu}
-        // onClick={() => setMediaMenuIsOpen((prev) => !prev)}
+        onClick={() => setMediaMenuIsOpen((prev) => !prev)}
       />
       <header className={styles.header}>
         <div className={styles.titleArea} >
@@ -35,7 +34,7 @@ const MyDay:React.FC = () => {
           <BsThreeDots className={styles.icon} />
         </div>
       </header>
-      <TodoTable tableData={data} />
+      <TodoTable tableData={myDay} />
       <AddTaskInput page="myDay" />
     </section>
   );

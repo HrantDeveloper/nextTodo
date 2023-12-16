@@ -1,3 +1,4 @@
+
 import { db } from "../firebaseConfig";
 import {
   collection,
@@ -6,10 +7,8 @@ import {
   deleteDoc,
   doc,
   updateDoc,
-  onSnapshot
 } from "firebase/firestore";
 
-import { getCurrentDate } from "./heleperFuncs";
 
 export async function postData(data:PostedItemDataType) {
   try {
@@ -33,30 +32,6 @@ export async function searchData(searchedWord:string) {
   return searchResults;
 }
 
-// export async function getData() {
-//   const response = await getDocs(collection(db, "tasks"));
-//   let data : {}[] = [];
-//   response.forEach((doc) => {
-//     data.push({ id: doc.id, ...doc.data() });
-//   });
-//   return data;
-// }
-
-export async function getData() {
-  return new Promise((resolve, reject) => {
-    let data:{}[] = [];
-     onSnapshot(collection(db, "tasks"), (snapshot) => {
-        data=[]
-      snapshot.docs.forEach((doc) => {
-        data.push({ id: doc.id, ...doc.data() });
-      });
-      resolve(data);
-    }, (error) => {
-      reject(error);
-    });
-  });
-}
-
 export async function deleteData(id:string) {
   try {
     await deleteDoc(doc(db, "tasks", id));
@@ -76,18 +51,3 @@ export async function updateData(id:string, newData:any) {
   }
 }
 
-export async function getQuantityData() {
-  const todayDate = getCurrentDate("short");
-return new Promise((resolve, reject) => {
-    let data:{}[] = [];
-     onSnapshot(collection(db, "tasks"), (snapshot) => {
-        data=[{}]
-      snapshot.docs.forEach((doc) => {
-        data.push({ id: doc.id, ...doc.data() });
-      });
-      resolve(data); 
-    }, (error) => {
-      reject(error);
-    });
-  });
-}
