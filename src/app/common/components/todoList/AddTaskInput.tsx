@@ -2,16 +2,12 @@
 import { IoAdd } from "react-icons/io5";
 import { useRef } from "react";
 import { postData } from "./../../../helpers/helpersForData";
-import { getCurrentDate } from "./../../../helpers/heleperFuncs";
-import { useGlobalContext } from "./../../Context/store";
 import styles from "./addTaskInput.module.css";
 
 const AddTaskInput:React.FC<{page:string}> = ({ page }) => {
-  const { setStateIsChanged } = useGlobalContext();
   const taskName = useRef<HTMLInputElement>(null);
   const choosedDateRef = useRef<HTMLInputElement>(null);
-  const date:string = getCurrentDate("short");
- 
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
@@ -34,8 +30,6 @@ const AddTaskInput:React.FC<{page:string}> = ({ page }) => {
       }
       taskName.current.value = "";
       choosedDateRef.current!.value = "";
-      setStateIsChanged((prev) => !prev);
-      
       return true;
     } catch (error) {
       alert("document was not sent");

@@ -10,7 +10,6 @@ export function getCurrentDate(type: 'short' | 'long') {
     day = now.toLocaleString('en-US', { weekday: 'long' });
     month = now.toLocaleString('en-US', { month: 'long' });
   }
-
   return `${day} ${date1} ${month}`;
 }
 

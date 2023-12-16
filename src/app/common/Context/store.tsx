@@ -6,68 +6,50 @@ import {
   Dispatch,
   SetStateAction,
 } from "react";
-import { getCurrentDate } from "../../helpers/heleperFuncs";
 
 type ContextProps={
-  dateLarge:string;
-  dateShort:string;
-  isLoading:boolean,
-  setIsLoading:Dispatch<SetStateAction<boolean>>,
-  stateIsChanged:boolean,
-  setStateIsChanged:Dispatch<SetStateAction<boolean>>,
+  // isLoading:boolean,
+  // setIsLoading:Dispatch<SetStateAction<boolean>>,
   menuBarIsOpen:boolean,
   setMenuBarIsOpen:Dispatch<SetStateAction<boolean>>,
   menuBarData:itemDataType |null ,
   setMenuBarData:Dispatch<SetStateAction<itemDataType| null>>,
-  // tableData: itemDataType [],
-  // setTableData:Dispatch<SetStateAction<itemDataType []>>,
-  tableData: any,
-  setTableData:Dispatch<SetStateAction< any>>,
+  searchedData: any,
+  setSearchedData:Dispatch<SetStateAction< any>>,
   mediaMenuIsOpen:boolean,
   setMediaMenuIsOpen:Dispatch<SetStateAction<boolean>>,
 }
 
     const GlobalContext = createContext<ContextProps>({
-    dateLarge:"",
-    dateShort:"",
-    isLoading:false,
-    setIsLoading:():boolean =>true,
-    stateIsChanged:true,
-    setStateIsChanged:():boolean =>false,
+    // isLoading:false,
+    // setIsLoading:():boolean =>true,
     menuBarIsOpen:false,
     setMenuBarIsOpen:():boolean =>true,
     menuBarData:null,
     setMenuBarData:():any=>{},
-    tableData:[],
-    setTableData:():[]=>[],
+    searchedData:[],
+    setSearchedData:():[]=>[],
     mediaMenuIsOpen:false,
     setMediaMenuIsOpen:():boolean =>true ,
   })
 
 export const GlobalContextProvider :React.FC <{children:React.ReactNode}>= ({ children }) => {
-  const [stateIsChanged, setStateIsChanged] = useState(true);
+
   const [menuBarIsOpen, setMenuBarIsOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
   const [menuBarData, setMenuBarData] = useState<itemDataType | null>(null);
-  // const [tableData, setTableData] = useState<[]|itemDataType []>([]);
-  const [tableData, setTableData] = useState<any>([]);
+  const [searchedData, setSearchedData] = useState<any>([]);
   const [mediaMenuIsOpen, setMediaMenuIsOpen] = useState(false);
-  const dateLarge = getCurrentDate("long");
-  const dateShort = getCurrentDate("short");
 
   const contextValue:ContextProps = {
-    dateLarge,
-    dateShort,
-    isLoading,
-    setIsLoading,
-    stateIsChanged,
-    setStateIsChanged,
+    // isLoading,
+    // setIsLoading,
     menuBarIsOpen,
     setMenuBarIsOpen,
     menuBarData,
     setMenuBarData,
-    tableData,
-    setTableData,
+    searchedData,
+    setSearchedData,
     mediaMenuIsOpen,
     setMediaMenuIsOpen,
   }

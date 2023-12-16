@@ -8,10 +8,10 @@ import { useGlobalContext } from "./../../Context/store";
 import { useRouter } from "next/navigation";
 import { CiMenuBurger } from "react-icons/ci";
 
-const Navbar:React.FC<{navBarQuantity:[]}> = ({navBarQuantity}) => {
+const Navbar:React.FC<{navBarQuantity:any}> = ({navBarQuantity}) => {
   const [isActive, setIsActive] = useState("");
   const router = useRouter();
-  const {  setTableData, mediaMenuIsOpen, setMediaMenuIsOpen } =
+  const {  setSearchedData, mediaMenuIsOpen, setMediaMenuIsOpen } =
     useGlobalContext();
 
   useEffect(() => {
@@ -25,7 +25,7 @@ const Navbar:React.FC<{navBarQuantity:[]}> = ({navBarQuantity}) => {
     event.preventDefault();
     if (event.target.value) {
       const data = await searchData(event.target.value);
-      setTableData(data);
+      setSearchedData(data);
     }
   };
 

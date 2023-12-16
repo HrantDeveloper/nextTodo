@@ -3,17 +3,13 @@ import React from "react";
 import Navbar from "./../components/navBar/Navbar";
 import RightMenuBar from "./../components/rightMenuBar/RightMenuBar";
 import { useGlobalContext } from "./../Context/store";
-import { getQuantityData } from "../../helpers/helpersForData";
-import { useEffect,useState } from "react";
+import { getCurrentDate } from "../../helpers/heleperFuncs";
+import { useCollection } from "../hooks/useCollection";
 const Layout :React.FC <any>=  (
   { children}:any
-  ) => {
-  const [itemQuantity, setItemQuantity] = useState<any>();  
-  const { menuBarIsOpen, menuBarData,dateShort,stateIsChanged } = useGlobalContext();
-  
-  useEffect(() => {
-    async function fetchData() {
-      const data:any = await getQuantityData();
+  ) => { 
+  const { menuBarIsOpen, menuBarData } = useGlobalContext();
+  const {data} = useCollection("tasks");
       let myDayQuantity:{}[] = [];
       let importantQuantity:{}[] = [];
       let plannedQuantity:{}[] = [];
@@ -23,21 +19,21 @@ const Layout :React.FC <any>=  (
         } 
     
         if (item.type == "myDay") {
-          if (item.date && item.date !== dateShort) {
+          if (item.date && item.date !== getCurrentDate("short")) {
             plannedQuantity.push(item);
           }
           myDayQuantity.push(item);
         } 
      
         else if (item.date && item.type == "planned") {
-          if (item.date == dateShort) {
+          if (item.date == getCurrentDate("short")) {
             plannedQuantity.push(item);
             myDayQuantity.push(item);
           } else {
             plannedQuantity.push(item);
           }
         } 
-        else if (item.type == "tasks" && item.date  && item.date !== dateShort) {
+        else if (item.type == "tasks" && item.date  && item.date !== getCurrentDate("short")) {
           plannedQuantity.push(item);
         }
       });
@@ -47,14 +43,9 @@ const Layout :React.FC <any>=  (
         ["planned", plannedQuantity.length],
         ["tasks", data.length],
       ];
-      setItemQuantity(quantityData);
-    }
-    fetchData();
-  }, [stateIsChanged]);
-
   return (
     <>
-      <Navbar  navBarQuantity = {itemQuantity}/>
+      <Navbar  navBarQuantity = {quantityData}/>
       {children}
       {menuBarIsOpen && menuBarData && <RightMenuBar data={menuBarData} />}
     </>

@@ -13,8 +13,7 @@ import { getCurrentDate } from "./../../../helpers/heleperFuncs";
 import Modal from "./Modal";
 
 const RightMenuBar:React.FC<{data:itemDataType}> = ({ data }) => {
-  const { setMenuBarIsOpen, setStateIsChanged, setMenuBarData,setTableData } =
-    useGlobalContext();
+  const { setMenuBarIsOpen, setMenuBarData } = useGlobalContext();
   const inputRef = useRef<HTMLInputElement>(null);
   const [calendarIsOpen, setCalendarIsOpen] = useState<boolean>(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -30,7 +29,6 @@ const RightMenuBar:React.FC<{data:itemDataType}> = ({ data }) => {
     }
     await updateData(id, newData);
     try {
-      setStateIsChanged((prev) => !prev);
       setMenuBarData(newData);
       inputRef.current!.value = "";
       if (whatIsChanged == "date") {
@@ -44,7 +42,6 @@ const RightMenuBar:React.FC<{data:itemDataType}> = ({ data }) => {
   const deleteItem = async (id:string) => {
     await deleteData(id);
     try {
-      setStateIsChanged((prev) => !prev);
       setModalIsOpen((prev) => !prev);
       setMenuBarIsOpen((prev) => !prev);
     } catch (err) {

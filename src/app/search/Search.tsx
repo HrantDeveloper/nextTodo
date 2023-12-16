@@ -2,13 +2,12 @@
 import styles from "./../myDay.module.css";
 import { BsThreeDots } from "react-icons/bs";
 import TodoTable from "./../common/components/todoList/todoTable/TodoTable";
-import PageLoader from "./../common/components/pageLoader/PageLoader";
+// import PageLoader from "./../common/components/pageLoader/PageLoader";
 import { useGlobalContext } from "./../common/Context/store";
 import { CiMenuBurger } from "react-icons/ci";
 
 const Search:React.FC = () => {
-  const { tableData, setMediaMenuIsOpen,isLoading } =
-    useGlobalContext();
+  const { searchedData, setMediaMenuIsOpen } = useGlobalContext();
 
   return (
     <section
@@ -24,11 +23,11 @@ const Search:React.FC = () => {
           <BsThreeDots className={styles.icon} />
         </div>
       </header>
-      {isLoading ? (
+      {/* {isLoading ? (
         <PageLoader />
-      ) : (
-          <TodoTable tableData={tableData} />
-      )}
+      ) : ( */}
+          <TodoTable tableData={searchedData} />
+      {/* )} */}
     </section>
   );
 };
